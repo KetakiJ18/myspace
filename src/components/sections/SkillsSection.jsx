@@ -4,14 +4,12 @@ import { motion } from 'framer-motion';
 const fade = { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: '-80px' } };
 
 const skills = [
-  { name: 'React', level: 92, color: '#6EE7FF' },
-  { name: 'Python', level: 88, color: '#F59E0B' },
-  { name: 'Three.js / R3F', level: 80, color: '#8B5CF6' },
-  { name: 'Machine Learning', level: 78, color: '#F472B6' },
-  { name: 'Computer Vision', level: 72, color: '#10B981' },
-  { name: 'Node.js', level: 82, color: '#6EE7FF' },
-  { name: 'Tailwind CSS', level: 95, color: '#8B5CF6' },
-  { name: 'Data Science', level: 76, color: '#F59E0B' },
+  { name: 'Python', level: 92, color: '#6EE7FF' },
+  { name: 'React', level: 88, color: '#F59E0B' },
+  { name: 'Machine Learning', level: 82, color: '#F472B6' },
+  { name: 'Computer Vision', level: 50, color: '#10B981' },
+  { name: 'Node.js', level: 62, color: '#6EE7FF' },
+  { name: 'Data Science', level: 90, color: '#F59E0B' },
 ];
 
 export function SkillsSection({ isDark }) {
@@ -70,13 +68,6 @@ export function SkillsSection({ isDark }) {
                   />
                 </div>
 
-                <span style={{
-                  width: 36, textAlign: 'right', fontSize: '0.7rem',
-                  fontFamily: "'Space Grotesk'", fontWeight: 500,
-                  color: skill.color,
-                }}>
-                  {skill.level}%
-                </span>
               </motion.div>
             ))}
           </div>

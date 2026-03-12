@@ -48,7 +48,7 @@ export function HeroSection({ isDark }) {
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
         }}>
-          Developer.<br/>Creator.<br/>Explorer.
+          Hello there!<br/>I am Ketaki Joshi
         </h1>
 
         <p style={{
@@ -60,7 +60,7 @@ export function HeroSection({ isDark }) {
           lineHeight: 1.7,
           margin: '0 auto',
         }}>
-          Building at the intersection of technology, music, and creativity.
+          Building at the intersection of technology and creativity.
           Scroll to explore my universe.
         </p>
       </motion.div>

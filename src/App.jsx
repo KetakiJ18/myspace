@@ -93,7 +93,7 @@ function App() {
         <AboutSection isDark={isDark} />
         <ProjectsSection isDark={isDark} />
         <SkillsSection isDark={isDark} />
-        <HobbiesSection isDark={isDark} />
+        {/*<HobbiesSection isDark={isDark} />*/}
         <BlogSection isDark={isDark} />
         <ContactSection isDark={isDark} />
       </div>

@@ -34,7 +34,7 @@ export function AboutSection({ isDark }) {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
           <motion.div {...fade} transition={{ ...fade.transition, delay: 0.1 }} style={{ ...glass, padding: '2rem' }}>
             <p style={{ fontSize: '0.95rem', lineHeight: 1.9, color: isDark ? '#CBD5E1' : '#475569', fontWeight: 300 }}>
-              I'm a developer and creator driven by curiosity.
+              I'm a developer driven by curiosity.
               I love building things that live at the intersection of technology,
               creativity, and design. Whether it's crafting AI-powered platforms or
               strumming chords on my guitar, I'm always exploring.
