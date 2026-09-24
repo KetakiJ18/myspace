@@ -10,7 +10,7 @@ const fade = {
 };
 
 // TODO: drop your resume PDF in /public and point this at it, e.g. "/resume.pdf"
-const RESUME_PATH = '/resume.pdf';
+const RESUME_PATH = '/Ketaki_Joshi_Resume.pdf';
 const LAST_UPDATED = 'Sept 2026';
 
 export function ResumeSection({ isDark }) {

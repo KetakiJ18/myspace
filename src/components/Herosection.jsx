@@ -1,7 +1,6 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
-import { HeroScene } from './Heroscene';
 
 // TODO: replace with your real name, role line, and summary
 export function HeroSection({ isDark }) {
@@ -20,13 +19,8 @@ export function HeroSection({ isDark }) {
         style={{
           maxWidth: 1100,
           margin: '0 auto',
-          width: '100%',
-          display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1.15fr) minmax(280px, 0.85fr)',
-          gap: '3rem',
-          alignItems: 'center',
+          width: '100%'
         }}
-        className="hero-grid"
       >
         {/* Text column */}
         <motion.div
@@ -87,39 +81,6 @@ export function HeroSection({ isDark }) {
             </a>
           </div>
         </motion.div>
-
-        {/* Interactive 3D column */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
-        >
-          <div
-            style={{
-              aspectRatio: '1 / 1',
-              border: '1px solid var(--line)',
-              borderRadius: 6,
-              overflow: 'hidden',
-              background: 'var(--bg-elevated)',
-            }}
-          >
-            <Suspense fallback={null}>
-              <HeroScene isDark={isDark} />
-            </Suspense>
-          </div>
-          <p
-            className="mono"
-            style={{
-              textAlign: 'center',
-              fontSize: '0.7rem',
-              color: 'var(--ink-muted)',
-              marginTop: 10,
-              letterSpacing: '0.02em',
-            }}
-          >
-            move to tilt · hold to compile
-          </p>
-        </motion.div>
       </div>
 
       <motion.div
@@ -130,12 +91,6 @@ export function HeroSection({ isDark }) {
       >
         <ArrowDown size={16} style={{ color: 'var(--ink-muted)', opacity: 0.5 }} />
       </motion.div>
-
-      <style>{`
-        @media (max-width: 820px) {
-          .hero-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </section>
   );
 }

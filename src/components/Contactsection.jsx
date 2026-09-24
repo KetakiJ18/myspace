@@ -11,9 +11,9 @@ const fade = {
 
 // TODO: point these at your real accounts
 const links = [
-  { icon: Mail, label: 'you@email.com', href: 'mailto:you@email.com' },
-  { icon: Github, label: 'github.com/yourhandle', href: 'https://github.com' },
-  { icon: Linkedin, label: 'linkedin.com/in/yourhandle', href: 'https://linkedin.com' },
+  { icon: Mail, label: 'joshiketaki101@gmail.com', href: 'joshiketaki101@gmail.com' },
+  { icon: Github, label: 'github.com/KetakiJ18', href: 'https://github.com/KetakiJ18'},
+  { icon: Linkedin, label: 'linkedin.com/in/ketaki-joshi', href: 'https://www.linkedin.com/in/ketaki-joshi-0b380b20a/' },
 ];
 
 export function ContactSection({ isDark }) {

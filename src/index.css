@@ -6,11 +6,11 @@
    ═══════════════════════════════════════════════════════════ */
 
 :root {
-  --bg: #F5F5F1;
+  --bg: #d0d2ef;
   --bg-elevated: #FFFFFF;
   --ink: #14171C;
   --ink-muted: #5B6169;
-  --accent: #2F6F5E;
+  --accent: #03045e;
   --accent-warm: #B8793F;
   --line: rgba(20, 23, 28, 0.1);
   --line-soft: rgba(20, 23, 28, 0.06);
@@ -68,6 +68,15 @@ h1, h2, h3 {
 
 a {
   color: inherit;
+}
+
+.hero-scene {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: auto;
 }
 
 /* ── Focus visibility ────────────────────────────────── */
@@ -147,4 +156,30 @@ a {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+.app {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.background-scene {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.background-scene canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.page-content {
+  position: relative;
+  z-index: 1;
 }

@@ -1,61 +1,269 @@
-import React, { useRef, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { MeshDistortMaterial } from '@react-three/drei';
-import * as THREE from 'three';
-
-function InteractiveKnot({ isDark, setActive, active }) {
-  const meshRef = useRef();
-  const [hovered, setHovered] = useState(false);
-  const target = useRef({ x: 0, y: 0 });
-
-  useFrame((state, delta) => {
-    const { pointer } = state;
-    target.current.x = pointer.y * 0.35;
-    target.current.y = pointer.x * 0.5;
-
-    if (meshRef.current) {
-      meshRef.current.rotation.x += (target.current.x - meshRef.current.rotation.x) * 0.05;
-      meshRef.current.rotation.y +=
-        delta * (active ? 0.9 : 0.22) + (target.current.y - meshRef.current.rotation.y) * 0.02;
-
-      const targetScale = active ? 1.1 : hovered ? 1.03 : 1;
-      meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.08);
-    }
-  });
-
-  return (
-    <mesh
-      ref={meshRef}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
-      onPointerDown={() => setActive(true)}
-      onPointerUp={() => setActive(false)}
-    >
-      <torusKnotGeometry args={[1, 0.32, 220, 32]} />
-      <MeshDistortMaterial
-        color={isDark ? '#59B892' : '#2F6F5E'}
-        roughness={0.3}
-        metalness={0.15}
-        distort={active ? 0.5 : 0.16}
-        speed={active ? 3 : 1}
-      />
-    </mesh>
-  );
-}
+import React, { useEffect, useRef } from 'react';
 
 export function HeroScene({ isDark }) {
-  const [active, setActive] = useState(false);
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+
+    let width = 0;
+    let height = 0;
+    let animationFrame;
+
+    const mouse = {
+      x: 0,
+      y: 0,
+
+      // Raw cursor position
+      targetX: 0,
+      targetY: 0,
+
+      active: false,
+    };
+
+    const particles = [];
+
+    const resize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+
+      const dpr = Math.min(
+        window.devicePixelRatio || 1,
+        2
+      );
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      createParticles();
+    };
+
+    const createParticles = () => {
+      particles.length = 0;
+
+      const count = Math.min(
+        850,
+        Math.max(
+          450,
+          Math.floor((width * height) / 2200)
+        )
+      );
+
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+
+          // Almost static background
+          vx: (Math.random() - 0.5) * 0.02,
+          vy: (Math.random() - 0.5) * 0.02,
+
+          size: Math.random() * 1.2 + 0.4,
+
+          baseOpacity:
+            Math.random() * 0.08 + 0.02,
+
+          // CURRENT rendered brightness
+          opacity: 0,
+        });
+      }
+    };
+
+    const handleMouseMove = (event) => {
+      mouse.targetX = event.clientX;
+      mouse.targetY = event.clientY;
+      mouse.active = true;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.active = false;
+    };
+
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      /*
+       * ----------------------------------------
+       * CURSOR MOVEMENT
+       * ----------------------------------------
+       *
+       * The cursor does NOT instantly move.
+       * It physically catches up to the real cursor.
+       *
+       * This creates the dragging/ripple feeling.
+       */
+
+      if (mouse.active) {
+        mouse.x +=
+          (mouse.targetX - mouse.x) * 0.055;
+
+        mouse.y +=
+          (mouse.targetY - mouse.y) * 0.055;
+      }
+
+      const dotColor = isDark
+        ? '105, 215, 165'
+        : '35, 105, 120';
+
+      /*
+       * Larger influence area.
+       *
+       * The outer area is extremely soft,
+       * so there is no visible "on/off" boundary.
+       */
+      const radius = 360;
+
+      particles.forEach((particle) => {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+
+        if (particle.x < 0) particle.x = width;
+        if (particle.x > width) particle.x = 0;
+
+        if (particle.y < 0) particle.y = height;
+        if (particle.y > height) particle.y = 0;
+
+        /*
+         * ----------------------------------------
+         * TARGET OPACITY
+         * ----------------------------------------
+         */
+
+        let targetOpacity =
+          particle.baseOpacity * 0.35;
+
+        if (mouse.active) {
+          const dx =
+            particle.x - mouse.x;
+
+          const dy =
+            particle.y - mouse.y;
+
+          const distance = Math.sqrt(
+            dx * dx + dy * dy
+          );
+
+          /*
+           * Gaussian falloff.
+           *
+           * Unlike a hard radius, this has
+           * no sudden cutoff.
+           */
+          const influence = Math.exp(
+            -(distance * distance) /
+              (2 * radius * radius)
+          );
+
+          targetOpacity +=
+            influence * 0.8;
+        }
+
+        /*
+         * ----------------------------------------
+         * TEMPORAL SMOOTHING
+         * ----------------------------------------
+         *
+         * THIS is the important part.
+         *
+         * Instead of:
+         *
+         * opacity = targetOpacity
+         *
+         * we gradually approach it.
+         *
+         * So particles don't suddenly turn on/off.
+         */
+        particle.opacity +=
+          (targetOpacity - particle.opacity) *
+          0.05;
+
+        /*
+         * Don't render essentially invisible dots.
+         */
+        if (particle.opacity < 0.008) return;
+
+        ctx.beginPath();
+
+        ctx.arc(
+          particle.x,
+          particle.y,
+          particle.size,
+          0,
+          Math.PI * 2
+        );
+
+        ctx.fillStyle = `rgba(
+          ${dotColor},
+          ${Math.min(particle.opacity, 0.9)}
+        )`;
+
+        ctx.fill();
+      });
+
+      animationFrame =
+        requestAnimationFrame(animate);
+    };
+
+    resize();
+
+    window.addEventListener(
+      'resize',
+      resize
+    );
+
+    window.addEventListener(
+      'mousemove',
+      handleMouseMove
+    );
+
+    window.addEventListener(
+      'mouseleave',
+      handleMouseLeave
+    );
+
+    mouse.x = width / 2;
+    mouse.y = height / 2;
+
+    mouse.targetX = mouse.x;
+    mouse.targetY = mouse.y;
+
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animationFrame);
+
+      window.removeEventListener(
+        'resize',
+        resize
+      );
+
+      window.removeEventListener(
+        'mousemove',
+        handleMouseMove
+      );
+
+      window.removeEventListener(
+        'mouseleave',
+        handleMouseLeave
+      );
+    };
+  }, [isDark]);
 
   return (
-    <Canvas
-      camera={{ position: [0, 0, 4.2], fov: 42 }}
-      dpr={[1, 2]}
-      onPointerMissed={() => setActive(false)}
-    >
-      <ambientLight intensity={isDark ? 0.6 : 1} />
-      <directionalLight position={[3, 4, 5]} intensity={1.1} color={isDark ? '#59B892' : '#ffffff'} />
-      <pointLight position={[-4, -2, -3]} intensity={0.5} color="#B8793F" />
-      <InteractiveKnot isDark={isDark} active={active} setActive={setActive} />
-    </Canvas>
+    <canvas
+      ref={canvasRef}
+      aria-hidden="true"
+      style={{
+        display: 'block',
+        width: '100%',
+        height: '100%',
+      }}
+    />
   );
 }
