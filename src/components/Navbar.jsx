@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
 const navLinks = [
-  { id: 'hero', label: 'Home' },
   { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
-  { id: 'hobbies', label: 'Hobbies' },
-  { id: 'blog', label: 'Blog' },
+  { id: 'resume', label: 'Resume' },
   { id: 'contact', label: 'Contact' },
 ];
 
-export function Navbar({ isDark, scrollRef }) {
+export function Navbar({ isDark }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const container = scrollRef?.current;
-    if (!container) return;
-    const handler = () => setScrolled(container.scrollTop > 100);
-    container.addEventListener('scroll', handler, { passive: true });
-    return () => container.removeEventListener('scroll', handler);
-  }, [scrollRef]);
+    const handler = () => setScrolled(window.scrollY > 80);
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
 
   const scrollTo = (id) => {
     const el = document.getElementById(id);
@@ -28,64 +25,58 @@ export function Navbar({ isDark, scrollRef }) {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-700"
+      className="fixed top-0 left-0 right-0 z-50"
       style={{
-        backdropFilter: scrolled ? 'blur(24px)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(24px)' : 'none',
-        background: scrolled
-          ? (isDark ? 'rgba(5,7,10,0.6)' : 'rgba(255,255,255,0.5)')
-          : 'transparent',
-        borderBottom: scrolled
-          ? `1px solid ${isDark ? 'rgba(110,231,255,0.06)' : 'rgba(139,92,246,0.08)'}`
-          : '1px solid transparent',
+        transition: 'background 0.4s ease, border-color 0.4s ease',
+        backdropFilter: scrolled ? 'blur(16px)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
+        background: scrolled ? 'color-mix(in srgb, var(--bg) 85%, transparent)' : 'transparent',
+        borderBottom: `1px solid ${scrolled ? 'var(--line)' : 'transparent'}`,
       }}
     >
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
-
-        {/* Logo */}
-        <button onClick={() => scrollTo('hero')} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{
-            width: 28, height: 28, borderRadius: '50%',
-            background: `linear-gradient(135deg, #6EE7FF, #8B5CF6)`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 12, fontWeight: 700, color: '#05070A',
-            fontFamily: "'Space Grotesk', sans-serif",
-          }}>
-            K
-          </div>
-          <span style={{
-            fontFamily: "'Space Grotesk', sans-serif",
+      <div
+        style={{
+          maxWidth: 1100,
+          margin: '0 auto',
+          padding: '0 2rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          height: 64,
+        }}
+      >
+        <button
+          onClick={() => scrollTo('hero')}
+          className="mono"
+          style={{
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            fontSize: '0.95rem',
             fontWeight: 500,
-            fontSize: '0.9rem',
-            color: isDark ? '#E2E8F0' : '#1E293B',
-            letterSpacing: '0.05em',
-          }}>
-            Portfolio
-          </span>
+            color: 'var(--accent)',
+            letterSpacing: '0.02em',
+          }}
+        >
+          [KJ]
         </button>
 
-        {/* Links */}
-        <div style={{ display: 'flex', gap: 8 }}>
-          {navLinks.slice(1).map(link => (
+        <div style={{ display: 'flex', gap: 28 }}>
+          {navLinks.map((link) => (
             <button
               key={link.id}
               onClick={() => scrollTo(link.id)}
-              className="btn-cosmic"
+              className="nav-link"
               style={{
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                padding: '6px 14px',
-                borderRadius: 8,
+                padding: '4px 0',
                 fontFamily: "'Inter', sans-serif",
-                fontSize: '0.72rem',
+                fontSize: '0.85rem',
                 fontWeight: 400,
-                letterSpacing: '0.06em',
-                color: isDark ? '#94A3B8' : '#64748B',
-                transition: 'all 0.3s ease',
+                color: 'var(--ink-muted)',
               }}
-              onMouseEnter={e => { e.target.style.color = isDark ? '#6EE7FF' : '#7C3AED'; e.target.style.background = isDark ? 'rgba(110,231,255,0.06)' : 'rgba(139,92,246,0.06)'; }}
-              onMouseLeave={e => { e.target.style.color = isDark ? '#94A3B8' : '#64748B'; e.target.style.background = 'none'; }}
             >
               {link.label}
             </button>
