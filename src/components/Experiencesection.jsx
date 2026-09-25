@@ -12,26 +12,19 @@ const fade = {
 const roles = [
   {
     date: '2026',
-    title: 'Software Engineering Intern',
-    org: '[Company Name]',
+    title: 'Data and AI Intern',
+    org: 'Onpoint Insights',
     description:
-      'One or two lines on what you owned — a system you built, a metric you moved, a problem you were the one who noticed.',
-    tags: ['Python', 'React', 'PostgreSQL'],
+      'Built a real-time monitoring and analytics system using Microsoft Fabric and Power BI, processing live equipment data at 1-second intervals across multiple machines. Developed interactive dashboards and an anomaly-based alerting system for monitoring machine performance and operational metrics.',
+    tags: ['Power BI', 'Data Analytics', 'Machine Learning'],
   },
   {
     date: '2025',
-    title: 'Machine Learning Intern',
-    org: '[Company Name]',
+    title: 'Tech Intern',
+    org: 'Cloud Scale®',
     description:
-      'What the model was for, what you shipped, and how it was actually used once it left your notebook.',
-    tags: ['PyTorch', 'Pandas', 'AWS'],
-  },
-  {
-    date: '2024',
-    title: 'Research Assistant',
-    org: '[Lab / Department Name]',
-    description: 'The question you were helping answer, and what you contributed to answering it.',
-    tags: ['Data Analysis', 'R'],
+      'Contributed to the research and design of an AI-driven healthcare application, exploring BioBERT-based Named Entity Recognition (NER) for extracting structured information from clinical text. Developed the high-level system and UI design to support model-driven information extraction and visualization.',
+    tags: ['React', 'FastAPI', 'Python'],
   },
 ];
 

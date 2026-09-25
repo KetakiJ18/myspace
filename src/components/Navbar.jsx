@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Moon, Sun } from 'lucide-react';
 
 const navLinks = [
   { id: 'about', label: 'About' },
@@ -9,7 +10,7 @@ const navLinks = [
   { id: 'contact', label: 'Contact' },
 ];
 
-export function Navbar({ isDark }) {
+export function Navbar({ isDark, toggleTheme  }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -61,7 +62,13 @@ export function Navbar({ isDark }) {
           [KJ]
         </button>
 
-        <div style={{ display: 'flex', gap: 28 }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 28,
+          }}
+        >
           {navLinks.map((link) => (
             <button
               key={link.id}
@@ -81,6 +88,14 @@ export function Navbar({ isDark }) {
               {link.label}
             </button>
           ))}
+
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
         </div>
       </div>
     </nav>

@@ -29,7 +29,7 @@ export function HeroSection({ isDark }) {
           transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
         >
           <p className="mono" style={{ fontSize: '0.85rem', color: 'var(--accent)', marginBottom: 20 }}>
-            open to internships & new-grad roles — 2027
+            Open to internships & New-grad roles
           </p>
 
           <h1
@@ -66,9 +66,8 @@ export function HeroSection({ isDark }) {
               marginBottom: 36,
             }}
           >
-            I'm a computer science student who works across machine learning, web
-            development, and data — most recently building an agentic analytics
-            dashboard and a multimodal mood-analysis platform. I like taking a
+            I'm a computer science student who works across machine learning,
+            data analysis and web development. I like taking a
             project from a rough idea to something people can actually use.
           </p>
 

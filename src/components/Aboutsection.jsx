@@ -11,8 +11,8 @@ const fade = {
 // TODO: replace with your real facts
 const facts = [
   { label: 'Based in', value: 'Mumbai, India' },
-  { label: 'Currently', value: 'B.Tech, Computer Science — final year' },
-  { label: 'Focus areas', value: 'Machine learning, full-stack web' },
+  { label: 'Currently', value: 'Final Year - B.Tech, Computer Science Engineering (Data Science)' },
+  { label: 'Focus areas', value: 'Machine learning, Data Analysis, Data Science' },
   { label: 'Outside of code', value: 'Guitar, coffee, cricket' },
 ];
 
@@ -39,7 +39,7 @@ export function AboutSection({ isDark }) {
           <motion.p
             {...fade}
             style={{
-              fontSize: 'clamp(1.15rem, 2vw, 1.4rem)',
+              fontSize: 'clamp(1.15rem, 1.5vw, 1.4rem)',
               lineHeight: 1.7,
               color: 'var(--ink)',
               fontWeight: 400,
@@ -47,7 +47,7 @@ export function AboutSection({ isDark }) {
             }}
           >
             I'm a developer who likes working close to the point where a system
-            meets the person using it — the model that actually informs a
+            meets the person using it; the model that actually informs a
             decision, the dashboard someone checks every morning. Most of my
             work sits between machine learning and product engineering, and I'm
             looking for an internship where I can do more of both.
@@ -62,7 +62,7 @@ export function AboutSection({ isDark }) {
               <div
                 key={fact.label}
                 className="row-divider"
-                style={{ display: 'flex', justifyContent: 'space-between', gap: 16, padding: '14px 0' }}
+                style={{ display: 'flex', justifyContent: 'space-between', gap: 60, padding: '14px 0' }}
               >
                 <dt style={{ fontSize: '0.85rem', color: 'var(--ink-muted)', fontWeight: 400 }}>
                   {fact.label}

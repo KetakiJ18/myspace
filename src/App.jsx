@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import { Moon, Sun } from 'lucide-react';
 
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -20,31 +19,34 @@ function App() {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   }, []);
 
-return (
-  <div className="app" data-theme={theme}>
+  return (
+    <div className="app" data-theme={theme}>
 
-    <FluidCursor />
+      <FluidCursor />
 
-    <div className="page-content">
-      <Navbar isDark={isDark} />
+      <div className="page-content">
 
-      <main>
-        <HeroSection isDark={isDark} />
-        <AboutSection isDark={isDark} />
-        <ExperienceSection isDark={isDark} />
-        <ProjectsSection isDark={isDark} />
-        <SkillsSection isDark={isDark} />
-        <ResumeSection isDark={isDark} />
-        <ContactSection isDark={isDark} />
-      </main>
+        <Navbar
+          isDark={isDark}
+          toggleTheme={toggleTheme}
+        />
 
-      <Footer />
+        <main>
+          <HeroSection isDark={isDark} />
+          <AboutSection isDark={isDark} />
+          <ExperienceSection isDark={isDark} />
+          <ProjectsSection isDark={isDark} />
+          <SkillsSection isDark={isDark} />
+          <ResumeSection isDark={isDark} />
+          <ContactSection isDark={isDark} />
+        </main>
+
+        <Footer />
+
+      </div>
+
     </div>
-
-    {/* theme button */}
-
-  </div>
-);
+  );
 }
 
 export default App;
