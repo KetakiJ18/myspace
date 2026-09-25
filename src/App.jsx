@@ -12,7 +12,7 @@ import { ContactSection } from './components/Contactsection';
 import FluidCursor from './components/FluidCursor';
 
 function App() {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
   const isDark = theme === 'dark';
 
   const toggleTheme = useCallback(() => {
