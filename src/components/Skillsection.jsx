@@ -10,9 +10,60 @@ const fade = {
 
 // TODO: adjust to your real stack
 const groups = [
-  { label: 'Languages', items: ['Python', 'JavaScript / TypeScript', 'SQL', 'R'] },
-  { label: 'Frameworks & libraries', items: ['React', 'Flask', 'PyTorch', 'Pandas'] },
-  { label: 'Tools & platforms', items: ['Git', 'Docker', 'AWS', 'PostgreSQL'] },
+  {
+    label: 'Data Science',
+    items: [
+      'Pandas',
+      'NumPy',
+      'Matplotlib',
+      'Seaborn',
+      'NLP',
+      'Scikit-learn',
+      'OpenCV',
+      'PyTorch',
+    ],
+  },
+  {
+    label: 'Cloud & Data Platforms',
+    items: [
+      'Microsoft Fabric',
+      'Microsoft Azure',
+    ],
+  },
+  {
+    label: 'BI & Analytics',
+    items: [
+      'Excel',
+      'Power BI',
+    ],
+  },
+  {
+    label: 'Languages',
+    items: [
+      'Python',
+      'SQL',
+      'Java',
+      'C',
+    ],
+  },
+  {
+    label: 'Web',
+    items: [
+      'HTML',
+      'CSS',
+      'JavaScript',
+      'React',
+    ],
+  },
+  {
+    label: 'Tools',
+    items: [
+      'Jupyter',
+      'Google Colab',
+      'Git',
+      'GitHub',
+    ],
+  },
 ];
 
 export function SkillsSection({ isDark }) {
