@@ -44,7 +44,7 @@ const projects = [
     githubLabel: 'GitHub',
 
     // Optional:
-    image: 'images/mediguard.png',
+    image: '/images/mediguard.png',
     liveHref: 'https://reimagined-goggles-1.onrender.com/',
     // liveLabel: 'Live Demo',
   },
@@ -58,7 +58,7 @@ const projects = [
     githubLabel: 'GitHub',
 
     // Optional:
-    image: 'images/maven.png',
+    image: '/images/maven.png',
     // liveHref: '...',
     // liveLabel: 'Live Demo',
   },
@@ -72,7 +72,7 @@ const projects = [
     githubLabel: 'GitHub',
 
     // Optional:
-    image: 'images/VARSA_Logo.ico',
+    image: '/images/VARSA_Logo.ico',
     // liveHref: '...',
     // liveLabel: 'Live Demo',
   },
